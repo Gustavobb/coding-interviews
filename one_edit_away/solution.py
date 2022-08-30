@@ -11,6 +11,9 @@
 # pale, bake -> false
 
 def one_replace_away(first: str, second: str) -> bool:
+    """
+    Given two strings checks if they are one (or zero) replace away from each other.
+    """
     has_replaced = False
     for i in range(len(first)):
         if first[i] != second[i]:
@@ -20,6 +23,9 @@ def one_replace_away(first: str, second: str) -> bool:
     return True
 
 def one_insert_delete_away(first: str, second: str, len_diff: int) -> bool:
+    """
+    Given two strings checks if they are one (or zero) insert/delete away from each other.
+    """
     longest_string = second
     shortest_string = first
     if len_diff > 0:
@@ -41,6 +47,9 @@ def one_insert_delete_away(first: str, second: str, len_diff: int) -> bool:
     return True
 
 def one_edit_away(first: str, second: str) -> bool:
+    """
+    Given two strings checks if they are one (or zero) edit away from each other.
+    """
     len_diff = len(first) - len(second)
     if len_diff >= 2: return False
     if len_diff == 0: return one_replace_away(first, second)
