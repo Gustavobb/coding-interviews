@@ -66,5 +66,4 @@ def main() -> int:
     assert one_edit_away("pale", "bake") == False
 
 if __name__ == "__main__":
-    main();
-    exit(0);
+    exit(main());

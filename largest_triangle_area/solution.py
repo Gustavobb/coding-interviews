@@ -39,5 +39,4 @@ def main() -> int:
     assert largest_triangle_area([[1,0],[0,0],[0,1]]) == 0.50000
 
 if __name__ == "__main__":
-    main();
-    exit(0);
+    exit(main());

@@ -27,5 +27,4 @@ def main() -> int:
     assert is_palindrome(121) == True
 
 if __name__ == "__main__":
-    main();
-    exit(0);
+    exit(main());
