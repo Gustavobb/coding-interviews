@@ -43,7 +43,7 @@ def sort_stack(stack: Stack) -> None:
     
     stack._items = sorted_stack._items
 
-def check(values):
+def check(values: list[int]) -> None:
     stack = Stack()
     stack._items = [v for v in values]
     sort_stack(stack)
