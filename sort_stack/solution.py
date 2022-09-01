@@ -32,12 +32,31 @@ def sort_stack(stack: Stack) -> None:
     """
     Sort stack
     """
-    pass
+    sorted_stack = Stack()
+    while not stack.is_empty():
+        tmp = stack.pop()
+
+        while not sorted_stack.is_empty() and sorted_stack.peek() < tmp:
+            stack.push(sorted_stack.pop())
+        
+        sorted_stack.push(tmp)
+    
+    stack._items = sorted_stack._items
+
+def check(values):
+    stack = Stack()
+    stack._items = [v for v in values]
+    sort_stack(stack)
+    assert stack._items == sorted(values, reverse=True)
 
 def main() -> int:
     """
     Main function
     """
+    check([])
+    check([1])
+    check([7, 10, 5, 3, 1, 8, 12])
+    check(list(range(10, 0, -1)))
     return 0
 
 if __name__ == "__main__":
