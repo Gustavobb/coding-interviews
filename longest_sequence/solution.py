@@ -19,18 +19,20 @@ def longest_sequence(n: int) -> int:
     current_length = 0
     previous_length = 0
 
-    n *= 2
     for i in range(BITS):
-        length = previous_length + current_length + 1
-        max_length = max_length if length < max_length else length
-        
         if n & 1 == 1:
             current_length += 1
-            n >>= 1
-            continue
         
-        previous_length = current_length if (n >> 1) & 1 == 1 else 0 
-        current_length = 0
+        elif (n >> 1) & 1 == 1:
+            previous_length = current_length
+            current_length = 0
+        
+        else:
+            previous_length = 0
+            current_length = 0
+        
+        length = previous_length + current_length + 1
+        max_length = max_length if length < max_length else length
         n >>= 1
     
     return max_length
