@@ -15,9 +15,25 @@ def longest_sequence(n: int) -> int:
     if ~n == 0:
         return BITS
 
+    max_length = 0
+    current_length = 0
+    previous_length = 0
+
+    n *= 2
     for i in range(BITS):
-        print(n & 1, n)
+        length = previous_length + current_length + 1
+        max_length = max_length if length < max_length else length
+        
+        if n & 1 == 1:
+            current_length += 1
+            n >>= 1
+            continue
+        
+        previous_length = current_length if (n >> 1) & 1 == 1 else 0 
+        current_length = 0
         n >>= 1
+    
+    return max_length
 
 def main() -> int:
     """
