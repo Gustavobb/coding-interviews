@@ -47,11 +47,17 @@ class Graph:
                     node1.adjacent.append(node2)
 
 def pre_order_recursive(root: TreeNode) -> None:
+    '''
+    Pre-order traversal of a binary tree.
+    '''
     print(root.value)
     if root.left: pre_order_recursive(root.left)
     if root.right: pre_order_recursive(root.right)
 
 def pre_order_iterative(root: TreeNode) -> None:
+    '''
+    Pre-order traversal of a binary tree.
+    '''
     stack = deque()
     stack.append(root)
 
@@ -62,17 +68,31 @@ def pre_order_iterative(root: TreeNode) -> None:
         if node.left: stack.append(node.left)
 
 def in_order_recursive(root: TreeNode) -> None:
+    '''
+    In-order traversal of a binary tree.
+    '''
     if root.left: in_order_recursive(root.left)
     print(root.value)
     if root.right: in_order_recursive(root.right)
 
 def post_order_recursive(root: TreeNode) -> None:
+    '''
+    Post-order traversal of a binary tree.
+    '''
     if root.left: post_order_recursive(root.left)
     if root.right: post_order_recursive(root.right)
     print(root.value)
 
 def breadth_first(root: TreeNode) -> None:
-    pass
+    stack = deque()
+    stack.append(root)
+
+    while len(stack) != 0:
+        node = stack.peek()
+        if node.left: stack.append(node.right)
+        if node.left: stack.append(node.left)
+    
+    print(stack)
 
 def graph_depth_first_recursive(node: GraphNode, visited=None) -> None:
     if visited is None:
