@@ -64,7 +64,7 @@ def pre_order_iterative(root: TreeNode) -> None:
     while len(stack) != 0:
         node = stack.pop()
         print(node.value)
-        if node.left: stack.append(node.right)
+        if node.right: stack.append(node.right)
         if node.left: stack.append(node.left)
 
 def in_order_recursive(root: TreeNode) -> None:
@@ -84,22 +84,60 @@ def post_order_recursive(root: TreeNode) -> None:
     print(root.value)
 
 def breadth_first(root: TreeNode) -> None:
+    '''
+    Breadth-first traversal of a binary tree.
+    '''
     stack = deque()
     stack.append(root)
 
     while len(stack) != 0:
-        node = stack.peek()
-        if node.left: stack.append(node.right)
+        node = stack.popleft()
+        print(node.value)
         if node.left: stack.append(node.left)
-    
-    print(stack)
+        if node.right: stack.append(node.right)
 
 def graph_depth_first_recursive(node: GraphNode, visited=None) -> None:
+    '''
+    Depth-first traversal of a graph.
+    '''
     if visited is None:
         visited = set()
+    
+    if node not in visited:
+        print(node.value)
+        visited.add(node)
+
+        for adjacent in node.adjacent:
+                graph_depth_first_recursive(adjacent, visited)
 
 def graph_depth_first_iterative(node: GraphNode) -> None:
-    pass
+    '''
+    Depth-first traversal of a graph.
+    '''
+    visited = set()
+    stack = deque()
+    stack.append(node)
+
+    while len(stack) != 0:
+        node = stack.pop()
+        if node not in visited:
+            print(node.value)
+            visited.add(node)
+            for adjacent in node.adjacent:
+                stack.append(adjacent)
 
 def graph_breadth_first(node: GraphNode) -> None:
-    pass
+    '''
+    Breadth-first traversal of a graph.
+    '''
+    visited = set()
+    stack = deque()
+    stack.append(node)
+
+    while len(stack) != 0:
+        node = stack.popleft()
+        if node not in visited:
+            print(node.value)
+            visited.add(node)
+            for adjacent in node.adjacent:
+                stack.append(adjacent)
