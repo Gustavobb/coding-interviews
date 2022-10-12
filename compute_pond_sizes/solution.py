@@ -9,12 +9,13 @@
 # 0 1 0 1
 
 # Output: 2, 4, 1 (in any order)
+import copy
 
 def compute_pond_sizes(land: list[list[int]]) -> list[int]:
     """
     Compute the sizes of all ponds in the matrix
     """
-    land_copy = land.copy()
+    land_copy = copy.deepcopy(land)
     pond_sizes = []
 
     def compute_pond_size(row: int, col: int) -> int:
@@ -38,6 +39,7 @@ def compute_pond_sizes(land: list[list[int]]) -> list[int]:
             if land_copy[row][col] == 0:
                 pond_sizes.append(compute_pond_size(row, col))
     
+    print(land_copy, land)
     return pond_sizes
 
 def main() -> int:
