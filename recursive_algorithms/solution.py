@@ -57,30 +57,34 @@ def digit_sum(n: int) -> int:
     return int(n % 10) + digit_sum(int(n / 10)) if n != 0 else 0
 
 def tree_sum(root: TreeNode) -> int:
-    return 0 if root is None else tree_sum(root.left) + tree_sum(root.right)
+    return root.value + tree_sum(root.left) + tree_sum(root.right) if root is not None else 0
 
 def tree_max(root: TreeNode) -> int:
-    if root is None: return 0
-    return max(root.value, tree_max(root.left), tree_max(root.right))
+    return max(root.value, tree_max(root.left), tree_max(root.right)) if root is not None else -float('inf') 
 
 def k_combinations(l: list[int], k: int) -> list[list[int]]:
-    #  All your functions must be recursive.
-    # returns a list with all possible combinations of k elements (the order doesn't matter).
-    # Example: for l = [1, 2, 3, 4] and k = 2 your function must return [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]].
-    return []
+    if k == 0: return [[]]
+    if len(l) == 0: return []
+    return k_combinations(l[1:], k) + [[l[0]] + i for i in k_combinations(l[1:], k - 1)]
 
 def all_strictly_increasing_sequences(k: int, n: int, **kwargs) -> list[list[int]]:
     return []
 
 def create_pattern(n: int) -> list[int]:
-    return []
+    return [n] + create_pattern(n - 5) + [n] if n > 0 else [n]
 
 def find_middle(head: LinkedListNode) -> LinkedListNode:
     # Don't change this function
     return find_middle_rec(head)[1]
 
 def find_middle_rec(head: LinkedListNode, n: int=0) -> tuple[int, LinkedListNode]:
+    # return the node in the middle of the linked list. Examples:
+    # The list 1->2->3->4->5 should return 3;
+    # The list 1->2->3->4->5->6 should return 4.
     # Hint: n will be used to count nodes from left to right and
     # the number returned by the function will be used to count the nodes from right to left
-    # TODO: Implement this function
-    return None, 0
+
+    if head is None: return (n, None)
+    n, node = find_middle_rec(head.next, n + 1)
+    n /= 2
+    # TODO: implement this function

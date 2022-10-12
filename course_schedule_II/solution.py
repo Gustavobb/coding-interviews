@@ -22,45 +22,42 @@
 # 0 <= ai, bi < numCourses
 # ai != bi
 # All the pairs [ai, bi] are distinct.
+from collections import deque
+import queue
 
 def find_order(numCourses: int, prerequisites: list[list[int]]) -> list[int]:
     '''
     Find the order of courses to take to finish all courses.
     '''
-    # Build a graph of dependencies
+    # Create a dictionary of dependencies and degree of dependencies
+    degree = dict()
     dependencies = dict()
     for course, dep in prerequisites:
-        dependencies.setdefault(course, set()).add(dep)
+        dependencies.setdefault(dep, set()).add(course)
+        degree[course] = degree.get(course, 0) + 1
+    
+    # Create a queue of courses with no dependencies
+    queue = deque([k for k in range(numCourses) if k not in degree])
+    answer = []
 
-    # Add to answer courses
-    answer = list()
-    visited = set()
-    for course in range(numCourses):
-        if course not in visited and not dfs(course, visited, answer, dependencies):
-            return list()
-
-    return answer
-
-def dfs(course: int, took: set[int], order: list[int], prereq: dict[int, list[int]]) -> bool:
-    '''
-    Depth-first search
-    '''
-    took.add(course)
-    for dep in prereq.get(course, []):
-        if dep not in took:
-            if not dfs(dep, took, order, prereq):
-                return False
-        elif dep in order:
-            return False
-    order.append(course)
-    return True
+    # Process the queue
+    while queue:
+        course = queue.popleft()
+        answer += [course]
+        
+        if course in dependencies:
+            for dep in dependencies[course]:
+                degree[dep] -= 1
+                if degree[dep] == 0: queue += [dep]
+        
+    return answer if len(answer) == numCourses else []
 
 def main() -> int:
     '''
     Main function
     '''
-    assert find_order(2, [[1, 0]]) == [0, 1]
     assert find_order(4, [[1, 0], [2, 0], [3, 1], [3, 2]]) == [0, 2, 1, 3]
+    assert find_order(2, [[1, 0]]) == [0, 1]
     assert find_order(1, []) == [0]
     return 0
 
