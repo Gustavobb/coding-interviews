@@ -23,7 +23,6 @@
 # ai != bi
 # All the pairs [ai, bi] are distinct.
 from collections import deque
-import queue
 
 def find_order(numCourses: int, prerequisites: list[list[int]]) -> list[int]:
     '''
