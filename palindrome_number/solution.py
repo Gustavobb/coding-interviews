@@ -12,6 +12,9 @@
 # Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
 
 def is_palindrome(x: int) -> bool:
+    """
+    Determine if an integer is a palindrome
+    """
     s_int = str(x)
     len_s_int = len(s_int)
     for i in range(int(len_s_int / 2)):
