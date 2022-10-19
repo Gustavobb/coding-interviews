@@ -86,5 +86,4 @@ def find_middle_rec(head: LinkedListNode, n: int=0) -> tuple[int, LinkedListNode
 
     if head is None: return (n, None)
     n, node = find_middle_rec(head.next, n + 1)
-    n /= 2
-    # TODO: implement this function
+    
