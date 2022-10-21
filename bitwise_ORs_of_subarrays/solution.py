@@ -18,16 +18,30 @@
 # Output: 6
 # Explanation: The possible results are 1, 2, 3, 4, 6, and 7.
 
-def subarrayBitwiseORs(self, arr: list[int]) -> int:
-        def k_combinations(l: list[int], k: int) -> list[list[int]]:
-            if k == 0: return [[]]
-            if len(l) == 0: return []
-            return k_combinations(l[1:], k) + [[l[0]] + i for i in k_combinations(l[1:], k - 1)]
+def subarray_bitwise_ORs(arr: list[int]) -> int:
+    """
+    Return the number of possible results
+    """
+    result, previous = set(), set()
+    
+    for i in arr:
+        curr = {i}
+        for j in previous:
+            curr.add(i | j)
+        result |= curr
+        previous = curr
 
-        for i in range(len(arr)):
-            l = k_combinations(arr, i + 1)
-            for j in range(len(l)):
-                arr.append(reduce(lambda x, y: x | y, l[j]))
+    return len(result)
 
-        return len(set(arr))
-        
+def main() -> int:
+    """
+    Main function
+    """
+    assert subarray_bitwise_ORs([0]) == 1
+    assert subarray_bitwise_ORs([1,1,2]) == 3
+    assert subarray_bitwise_ORs([1,2,4]) == 6
+
+    return 0
+
+if __name__ == "__main__":
+    exit(main())
