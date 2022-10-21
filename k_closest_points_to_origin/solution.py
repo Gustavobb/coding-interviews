@@ -40,7 +40,7 @@ def dist_points_origin(point1: list[int]):
     """
     Calculate the distance between two points.
     """
-    return ((point1[0] - 0) ** 2 + (point1[1] - 0) ** 2) ** (0.5)
+    return ((point1[0] - 0) ** 2 + (point1[1] - 0) ** 2)
 
 def main() -> int:
     """

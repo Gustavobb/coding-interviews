@@ -29,7 +29,7 @@ def valid_square(p1: list[int], p2: list[int], p3: list[int], p4: list[int]) -> 
     
     if hypotenuse == cathetus: return False
     return hypotenuse == (cathetus * 2)
-        
+
 def dist(p0: list[int], p1: list[int]) -> float:
     """
     Return the distance between two points

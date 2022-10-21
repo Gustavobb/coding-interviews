@@ -1,41 +1,50 @@
-# https://leetcode.com/problems/circle-and-rectangle-overlapping/description/
+# https://leetcode.com/problems/valid-square/
 
-# You are given a circle represented as (radius, xCenter, yCenter) and an axis-aligned rectangle represented as (x1, y1, x2, y2), where (x1, y1) are the coordinates of the bottom-left corner, and (x2, y2) are the coordinates of the top-right corner of the rectangle.
-# Return true if the circle and rectangle are overlapped otherwise return false. In other words, check if there is any point (xi, yi) that belongs to the circle and the rectangle at the same time.
+# Given the coordinates of four points in 2D space p1, p2, p3 and p4, return true if the four points construct a square.
+# The coordinate of a point pi is represented as [xi, yi]. The input is not given in any order.
+# A valid square has four equal sides with positive length and four equal angles (90-degree angles).
 
-# Input: radius = 1, xCenter = 0, yCenter = 0, x1 = 1, y1 = -1, x2 = 3, y2 = 1
+# Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,1]
 # Output: true
-# Explanation: Circle and rectangle share the point (1,0).
 
-# Input: radius = 1, xCenter = 1, yCenter = 1, x1 = 1, y1 = -3, x2 = 2, y2 = -1
+# Input: p1 = [0,0], p2 = [1,1], p3 = [1,0], p4 = [0,12]
 # Output: false
 
-# Input: radius = 1, xCenter = 0, yCenter = 0, x1 = -1, y1 = 0, x2 = 0, y2 = 1
+# Input: p1 = [1,0], p2 = [-1,0], p3 = [0,1], p4 = [0,-1]
 # Output: true
 
-def check_overlap(radius: int, x_center: int, y_center: int, x1: int, y1: int, x2: int, y2: int) -> bool:
+def valid_square(p1: list[int], p2: list[int], p3: list[int], p4: list[int]) -> bool:
     """
-    Check if the circle and rectangle are overlapped.
+    Return True if the four points construct a square
     """
-    rec_center_x = (x2 + x1) / 2
-    rec_center_y = (y2 + y1) / 2
+    point = [p1, p2, p3, p4]
+    hypotenuse = 0
+    cathetus = dist(p1, p2)
     
-    diff_center_x = abs(x_center - rec_center_x) 
-    diff_center_y = abs(y_center - rec_center_y)
+    for i in range(len(point)):
+        for j in range(i + 1, len(point)):
+            d = dist(point[i], point[j])
+            if d > hypotenuse: hypotenuse = d
+            elif d < cathetus: cathetus = d
     
-    half_rec_x = (x2 - x1) / 2 
-    half_rec_y = (y2 - y1) / 2
-        
-    diff = max(0, diff_center_x - half_rec_x) ** 2 + max(0, diff_center_y - half_rec_y) ** 2
-    return (diff <= radius ** 2)
+    if hypotenuse == cathetus: return False
+    return hypotenuse == (cathetus * 2)
 
+def dist(p0: list[int], p1: list[int]) -> float:
+    """
+    Return the distance between two points
+    """
+    return (p0[0] - p1[0]) ** 2 + (p0[1] - p1[1]) ** 2
+    
 def main() -> int:
     """
     Main function
     """
-    assert check_overlap(1, 0, 0, 1, -1, 3, 1) == True
-    assert check_overlap(1, 1, 1, 1, -3, 2, -1) == False
-    assert check_overlap(1, 0, 0, -1, 0, 0, 1) == True
+    assert valid_square([0,0], [1,1], [1,0], [0,1]) == True
+    assert valid_square([0,0], [1,1], [1,0], [0,12]) == False
+    assert valid_square([1,0], [-1,0], [0,1], [0,-1]) == True
+
+    return 0
 
 if __name__ == "__main__":
     exit(main())
