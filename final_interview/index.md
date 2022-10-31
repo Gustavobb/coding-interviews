@@ -35,11 +35,12 @@ https://leetcode.com/problems/valid-square/description/
 * There're at least 4 possible ways to solve the problem.
 * Try to think how pythagorean theorem can help.
 * The input can come at any order, but does it really matter?
+* The distance between two points is (p0.x - p1.x)^2 + (p0.y - p1.y)^2
 
 ## Solution
 
 <!-- Solution to the problem. -->
-Form a list of the four points inputted. Iterate over those points two times, because you need to calculate the distance between two points. Once you have that, keep track of the largest value and the shortest value. If it is a square, the largest value (hypotenuse) should be equal to the smallest value squared (cathetus). So just return that comparison.
+Form a list of the four points inputted. Iterate over those points two times, because you need to calculate the distance between two points. Once you have that, keep track of the largest value and the shortest value. If it is a square, the largest value (hypotenuse) should be equal to the smallest value squared (cathetus). So just return that comparison. If it is not a square, the comparison will be false.
 
 ## Time and space complexity
 

@@ -28,7 +28,7 @@ def all_possible_full_binary_trees(n: int) -> list[TreeNode]:
         for left_child in all_possible_full_binary_trees(childs):
             for right_child in all_possible_full_binary_trees(n - childs - 1):
                 ret += [TreeNode(0, left_child, right_child)]
-                
+            
     return ret
 
 def main() -> int:

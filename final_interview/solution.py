@@ -20,7 +20,7 @@ def valid_square(p1: list[int], p2: list[int], p3: list[int], p4: list[int]) -> 
     point = [p1, p2, p3, p4]
     hypotenuse = 0
     cathetus = dist(p1, p2)
-    
+    print(point)
     for i in range(len(point)):
         for j in range(i + 1, len(point)):
             d = dist(point[i], point[j])
